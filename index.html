@@ -34,7 +34,7 @@
         <div class="titleContainer">
             <h2 class="mt-3">税計算ツール</h2>
         </div>
-        
+
     </header>
 
     <div>
@@ -45,15 +45,49 @@
                 <input type="text" class="form-control" v-model="taxRate" aria-label="Amount (to the nearest dollar)">
                 <span class="input-group-text">%</span>
             </div>
+            <input type="checkbox" class="btn-check" id="btn-check-outlined1" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btn-check-outlined1">ひらがな　→　カタカナ</label><br>
+
+
+            <input type="radio" v-model="styleKatakana" value="hankaku" class="btn-check" name="options-outlined-kana" id="success-outlined-kana"
+                autocomplete="off">
+            <label class="btn btn-outline-success" for="success-outlined-kana">半角カタカナ</label>
+
+            <input type="radio" v-model="styleKatakana" value="zenkaku" class="btn-check" name="options-outlined-kana" id="danger-outlined-kana"
+                autocomplete="off" checked>
+            <label class="btn btn-outline-danger" for="danger-outlined-kana">全角カタカナ</label><br>
+
+
+            <input type="radio" v-model="styleNumber" value="hankaku" class="btn-check" name="options-outlined-number" id="success-outlined-number"
+                autocomplete="off" checked>
+            <label class="btn btn-outline-success" for="success-outlined-number">半角数字</label>
+
+            <input type="radio" v-model="styleNumber" value="zenkaku" class="btn-check" name="options-outlined-number" id="danger-outlined-number"
+                autocomplete="off">
+            <label class="btn btn-outline-danger" for="danger-outlined-number">全角数字</label><br>
+
+
+            <input type="radio" v-model="styleAlphabet" value="hankaku" class="btn-check" name="options-outlined-alphabet" id="success-outlined-alphabet"
+                autocomplete="off" checked>
+            <label class="btn btn-outline-success" for="success-outlined-alphabet">半角英字</label>
+
+            <input type="radio" v-model="styleAlphabet" value="zenkaku" class="btn-check" name="options-outlined-alphabet" id="danger-outlined-alphabet"
+                autocomplete="off">
+            <label class="btn btn-outline-danger" for="danger-outlined-alphabet">全角英字</label><br>
+
+
+
             <div class="input-group">
                 <span class="input-group-text">変換対象</span>
                 <input type="text" class="form-control" v-model="sourceCharacter" placeholder=""
                     aria-label="Recipient's username with two button addons">
-                <button type="button" class="btn btn-outline-primary" id="out-tax" v-on:click="characterConversion">変換</button>
+                <button type="button" class="btn btn-outline-primary" id="out-tax"
+                    v-on:click="characterConversion">変換</button>
             </div>
             <div class="input-group mt-3" v-if="resultCharacter">
                 <span class="input-group-text">変換結果</span>
-                <input type="text" class="form-control" v-model="resultCharacter" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control" v-model="resultCharacter"
+                    aria-label="Amount (to the nearest dollar)">
             </div>
             <div class="input-group">
                 <span class="input-group-text">　値　</span>
@@ -70,15 +104,19 @@
 
             <div class="list-container mt-3" v-if="resultTaxOutAmoutStyleArray">
                 <div class="list-group me-3" style="max-width: 50%;">
-                    <a class="list-group-item list-group-item-action active text-center" aria-current="true" style="background-color:#BE3455;border-color:#BE3455">税別</a>
+                    <a class="list-group-item list-group-item-action active text-center" aria-current="true"
+                        style="background-color:#BE3455;border-color:#BE3455">税別</a>
                     <div v-for="outTaxItem in resultTaxOutAmoutStyleArray" :key="outTaxItem ">
-                        <a class="list-group-item list-group-item-action" @click="copyToClipboard(outTaxItem)">{{outTaxItem }}</a>
+                        <a class="list-group-item list-group-item-action"
+                            @click="copyToClipboard(outTaxItem)">{{outTaxItem }}</a>
                     </div>
                 </div>
                 <div class="list-group" style="max-width: 50%;">
-                    <a class="list-group-item list-group-item-action active text-center" aria-current="true" style="background-color:#BE3455;border-color:#BE3455">税込</a>
+                    <a class="list-group-item list-group-item-action active text-center" aria-current="true"
+                        style="background-color:#BE3455;border-color:#BE3455">税込</a>
                     <div v-for="inTaxItem in resultTaxInAmoutStyleArray" :key="inTaxItem">
-                        <a class="list-group-item list-group-item-action" @click="copyToClipboard(inTaxItem)">{{inTaxItem }}</a>
+                        <a class="list-group-item list-group-item-action"
+                            @click="copyToClipboard(inTaxItem)">{{inTaxItem }}</a>
                     </div>
                 </div>
             </div>

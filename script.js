@@ -148,6 +148,10 @@ const appdata = {
         return {
             sourceCharacter: "",
             resultCharacter: "",
+            styleKatakana: "",
+            styleNumber: "",
+            styleAlphabet: "",
+
             taxRate: 10,
             amount: "",
             resultTax: "",

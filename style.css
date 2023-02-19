@@ -114,7 +114,7 @@ button.bg-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(190, 52, 85, 0.5);
 }
 
-.btn-outline-primary {
+/* .btn-outline-primary {
     color: #BE3455;
     background-color: transparent;
     border-color: #BE3455;
@@ -124,7 +124,7 @@ button.bg-primary:focus {
     color: #fff;
     background-color: #BE3455;
     border-color: #BE3455;
-}
+} */
 
 .btn-outline-primary:focus, .btn-outline-primary.focus {
     box-shadow: 0 0 0 0.2rem rgba(190, 52, 85, 0.5);
