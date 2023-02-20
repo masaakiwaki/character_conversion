@@ -1,3 +1,10 @@
+function hiragana2katakana(str) {
+    return str.replace(/[\u3041-\u3096]/g, ch =>
+      String.fromCharCode(ch.charCodeAt(0) + 0x60)
+    );
+  }
+
+
 function hankaku2Zenkaku(str) {
     return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
         return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
@@ -33,15 +40,15 @@ function zenkana2Hankana(str) {
          "ワ": "ﾜ", "ヲ": "ｦ", "ン": "ﾝ",
          "ァ": "ｧ", "ィ": "ｨ", "ゥ": "ｩ", "ェ": "ｪ", "ォ": "ｫ",
          "ッ": "ｯ", "ャ": "ｬ", "ュ": "ｭ", "ョ": "ｮ",
-         "。": "｡", "、": "､", "ー": "ｰ", "「": "｢", "」": "｣", "・": "･"
+         "。": "｡", "、": "､", "ー": "ｰ", "「": "｢", "」": "｣", "・": "･",
     }
     var reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g');
     return str
             .replace(reg, function (match) {
                 return kanaMap[match];
             })
-            .replace(/゛/g, 'ﾞ')
-            .replace(/゜/g, 'ﾟ');
+            // .replace(/゛/g, 'ﾞ')
+            // .replace(/゜/g, 'ﾟ');
 };
 
 
@@ -66,7 +73,7 @@ function hankana2Zenkana(str) {
         'ﾜ': 'ワ', 'ｦ': 'ヲ', 'ﾝ': 'ン',
         'ｧ': 'ァ', 'ｨ': 'ィ', 'ｩ': 'ゥ', 'ｪ': 'ェ', 'ｫ': 'ォ',
         'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
-        '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
+        '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・',
     };
 
     var reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g');
@@ -79,8 +86,47 @@ function hankana2Zenkana(str) {
 };
 
 
+function zenspace2Hanspace(str) {
+    var kanaMap = {
+        '　': ' '
+    }
+    var reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g');
+    return str
+            .replace(reg, function (match) {
+                return kanaMap[match];
+            })
+            .replace(/゛/g, 'ﾞ')
+            .replace(/゜/g, 'ﾟ');
+};
 
 
+function hanspace2Zenspace(str) {
+    var kanaMap = {
+        ' ': '　'
+    };
+
+    var reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g');
+    return str
+            .replace(reg, function (match) {
+                return kanaMap[match];
+            })
+            .replace(/ﾞ/g, '゛')
+            .replace(/ﾟ/g, '゜');
+};
+
+
+function smalleKana2largeKana(str) {
+    var kanaMap = {
+        'ｧ': 'ｱ', 'ｨ': 'ｲ', 'ｩ': 'ｳ', 'ｪ': 'ｴ', 'ｫ': 'ｵ',
+        'ｯ': 'ﾂ', 'ｬ': 'ﾔ', 'ｭ': 'ﾕ', 'ｮ': 'ﾖ',
+    };
+
+    var reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g');
+    return str
+            .replace(reg, function (match) {
+                return kanaMap[match];
+            })
+};
 
 
 // const hankaku2Zenkaku = (str) => {
@@ -148,9 +194,11 @@ const appdata = {
         return {
             sourceCharacter: "",
             resultCharacter: "",
-            styleKatakana: "",
-            styleNumber: "",
-            styleAlphabet: "",
+            styleHiraganaKatakana: false,
+            styleKatakanaSize: false,
+            styleKatakana: "zenkaku",
+            styleEisuu: "hankaku",
+            styleSpace: "hankaku",
 
             taxRate: 10,
             amount: "",
@@ -162,7 +210,41 @@ const appdata = {
         },
     methods:{
         characterConversion(event){
-            this.resultCharacter = hankaku2Zenkaku(this.sourceCharacter) 
+            let sourceString = this.sourceCharacter
+
+            if (this.styleHiraganaKatakana == true) {
+                sourceString = hiragana2katakana(sourceString)
+            }
+
+            if (this.styleKatakana == "zenkaku") {
+                sourceString = hankana2Zenkana(sourceString)
+            }
+
+            if (this.styleKatakana == "hankaku") {
+                sourceString = zenkana2Hankana(sourceString)
+            }
+
+            if (this.styleEisuu == "zenkaku") {
+                sourceString = zenkaku2Hankaku(sourceString)
+            }
+
+            if (this.styleEisuu == "hankaku") {
+                sourceString = hankaku2Zenkaku(sourceString)
+            }
+
+            if (this.styleSpace == "zenkaku") {
+                sourceString = hanspace2Zenspace(sourceString)
+            }
+
+            if (this.styleSpace == "hankaku") {
+                sourceString = zenspace2Hanspace(sourceString)
+            }
+
+            if (this.styleKatakanaSize == true) {
+                sourceString = smalleKana2largeKana(sourceString)
+            }
+
+            this.resultCharacter = sourceString
         },
 
 
