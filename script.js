@@ -199,13 +199,6 @@ const appdata = {
             styleKatakana: "zenkaku",
             styleEisuu: "hankaku",
             styleSpace: "hankaku",
-
-            taxRate: 10,
-            amount: "",
-            resultTax: "",
-            resultAmout: "" ,
-            resultTaxOutAmoutStyleArray: "",
-            resultTaxInAmoutStyleArray: ""
         }
         },
     methods:{
