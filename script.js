@@ -242,11 +242,11 @@ const appdata = {
                 sourceString = sourceString.toUpperCase()
             }
 
-
-
-            
-
             this.resultCharacter = sourceString
+        },
+
+        copyText(){
+            navigator.clipboard.writeText(this.resultCharacter)
         },
 
 

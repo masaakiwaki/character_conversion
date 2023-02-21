@@ -99,9 +99,12 @@
             <div class="mb-3">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                     v-model="sourceCharacter"></textarea><br>
-                <button type="button" class="btn btn-outline-primary" id="out-tax"
-                    v-on:click="characterConversion">変換</button>
+
             </div>
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" id="out-tax"
+            v-on:click="characterConversion">変換</button><br>
+        </div>
 
             <div class="mb-3" v-if="resultCharacter">
                 <label for="exampleFormControlTextarea1" class="form-label">変換結果</label><br>
@@ -109,8 +112,13 @@
             <div class="mb-3" v-if="resultCharacter">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                     v-model="resultCharacter"></textarea><br>
+
             </div>
 
+            <div v-if="resultCharacter">
+            <button type="button" class="btn btn-primary" id="out-tax"
+            v-on:click="copyText">コピー</button>
+        </div>
 
         </main>
         <aside></aside>
