@@ -196,6 +196,7 @@ const appdata = {
             resultCharacter: "",
             styleHiraganaKatakana: false,
             styleKatakanaSize: false,
+            styleAlfabetSize: false,
             styleKatakana: "zenkaku",
             styleEisuu: "hankaku",
             styleSpace: "hankaku",
@@ -236,6 +237,14 @@ const appdata = {
             if (this.styleKatakanaSize == true) {
                 sourceString = smalleKana2largeKana(sourceString)
             }
+
+            if (this.styleAlfabetSize == true) {
+                sourceString = sourceString.toUpperCase()
+            }
+
+
+
+            
 
             this.resultCharacter = sourceString
         },

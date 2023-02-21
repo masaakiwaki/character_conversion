@@ -53,6 +53,12 @@
             </div>
 
             <div class="mb-3">
+                <input type="checkbox" v-model="styleAlfabetSize" class="btn-check" id="btn-check-outlined3"
+                    autocomplete="off">
+                <label class="btn btn-outline-primary" for="btn-check-outlined3">英字小文字　→　英字大文字</label><br>
+            </div>
+
+            <div class="mb-3">
                 <input type="radio" v-model="styleKatakana" value="hankaku" class="btn-check"
                     name="options-outlined-kana" id="success-outlined-kana" autocomplete="off">
                 <label class="btn btn-outline-success" for="success-outlined-kana">半角カタカナ</label>
@@ -66,11 +72,11 @@
             <div class="mb-3">
                 <input type="radio" v-model="styleEisuu" value="hankaku" class="btn-check" name="options-outlined-eisuu"
                     id="success-outlined-eisuu" autocomplete="off" checked>
-                <label class="btn btn-outline-success" for="success-outlined-eisuu">半角英数</label>
+                <label class="btn btn-outline-success" for="success-outlined-eisuu">半角英数字</label>
 
                 <input type="radio" v-model="styleEisuu" value="zenkaku" class="btn-check" name="options-outlined-eisuu"
                     id="danger-outlined-eisuu" autocomplete="off">
-                <label class="btn btn-outline-danger" for="danger-outlined-eisuu">全角英数</label><br>
+                <label class="btn btn-outline-danger" for="danger-outlined-eisuu">全角英数字</label><br>
             </div>
 
 
